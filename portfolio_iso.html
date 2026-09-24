@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portfolio Professionnel — Normes ISO 27001 &amp; ISO 42001 | Sécurité &amp; Gouvernance IA</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --card-bg: rgba(20, 26, 38, 0.85);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --primary: #10b981;
+      --primary-glow: rgba(16, 185, 129, 0.25);
+      --secondary: #3b82f6;
+      --secondary-glow: rgba(59, 130, 246, 0.25);
+      --accent: #8b5cf6;
+      --text: #f1f5f9;
+      --text-muted: #94a3b8;
+      --font: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: var(--font);
+      line-height: 1.6;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 85% 80%, rgba(59, 130, 246, 0.12) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    header {
+      padding: 2.5rem 1.5rem 2rem;
+      border-bottom: 1px solid var(--card-border);
+      background: rgba(11, 15, 23, 0.7);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1.5rem;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .badge-lan {
+      font-size: 0.75rem;
+      background: rgba(16, 185, 129, 0.15);
+      color: #34d399;
+      padding: 0.35rem 0.75rem;
+      border-radius: 9999px;
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      font-family: var(--mono);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .badge-lan::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #10b981;
+      box-shadow: 0 0 8px #10b981;
+    }
+
+    nav {
+      display: flex;
+      gap: 0.5rem;
+      overflow-x: auto;
+      padding-bottom: 0.2rem;
+    }
+
+    .nav-btn {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text-muted);
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      white-space: nowrap;
+    }
+
+    .nav-btn:hover, .nav-btn.active {
+      color: #ffffff;
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--card-border);
+    }
+
+    .nav-btn.active {
+      color: var(--primary);
+      border-color: rgba(16, 185, 129, 0.4);
+      background: rgba(16, 185, 129, 0.08);
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 2.5rem auto;
+      padding: 0 1.5rem;
+    }
+
+    .hero {
+      text-align: center;
+      padding: 3rem 1rem 4rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 5vw, 3.4rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 1.2rem;
+      background: linear-gradient(135deg, #ffffff 40%, #94a3b8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.2rem;
+      text-align: center;
+      transition: transform 0.2s ease;
+    }
+
+    .stat-card:hover {
+      transform: translateY(-3px);
+    }
+
+    .stat-number {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: var(--mono);
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 0.3rem;
+    }
+
+    /* Section Styles */
+    section {
+      display: none;
+      animation: fadeIn 0.3s ease;
+    }
+
+    section.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .grid-2 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-iso-27001 {
+      border-top: 4px solid var(--secondary);
+    }
+
+    .card-iso-42001 {
+      border-top: 4px solid var(--primary);
+    }
+
+    .card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1.5rem;
+    }
+
+    .card-title {
+      font-size: 1.4rem;
+      font-weight: 700;
+    }
+
+    .card-subtitle {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      margin-top: 0.2rem;
+    }
+
+    .pill {
+      font-size: 0.75rem;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-weight: 600;
+    }
+
+    .pill-blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .pill-green { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .pill-purple { background: rgba(139, 92, 246, 0.2); color: #c084fc; }
+
+    .feature-list {
+      list-style: none;
+      margin: 1.5rem 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+
+    .feature-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.8rem;
+      font-size: 0.95rem;
+      color: #cbd5e1;
+    }
+
+    .feature-list svg {
+      flex-shrink: 0;
+      margin-top: 3px;
+    }
+
+    /* Comparison Table */
+    .table-container {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      overflow-x: auto;
+      margin: 2rem 0;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+    }
+
+    th, td {
+      padding: 1.2rem 1.5rem;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    td {
+      font-size: 0.95rem;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    /* Visual Banner / Diagrams */
+    .diagram-container {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 16px;
+      padding: 2.5rem;
+      margin: 2.5rem 0;
+      text-align: center;
+    }
+
+    .svg-diagram {
+      max-width: 100%;
+      height: auto;
+    }
+
+    /* LinkedIn Market Insight Card */
+    .insight-card {
+      background: linear-gradient(145deg, rgba(30, 41, 59, 0.7), rgba(15, 23, 42, 0.9));
+      border: 1px solid rgba(59, 130, 246, 0.25);
+      border-radius: 16px;
+      padding: 2rem;
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+
+    .insight-header {
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+
+    .linkedin-icon {
+      width: 32px;
+      height: 32px;
+      background: #0077b5;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      font-family: sans-serif;
+    }
+
+    footer {
+      border-top: 1px solid var(--card-border);
+      padding: 3rem 1.5rem;
+      margin-top: 5rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.9rem;
+    }
+
+    .audit-flow {
+      display: flex;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+      margin: 2rem 0;
+    }
+
+    .step-box {
+      flex: 1;
+      min-width: 180px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 1.2rem;
+      text-align: center;
+    }
+
+    .step-box .num {
+      width: 28px;
+      height: 28px;
+      background: var(--primary);
+      color: #0b0f17;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 0.8rem;
+      font-size: 0.85rem;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-container">
+      <div class="brand">
+        <span class="badge-lan">MULTI-AGENT LAN ORCHESTRATED</span>
+        <strong style="font-size: 1.1rem; letter-spacing: -0.01em;">ISO Governance &amp; AI Portfolio</strong>
+      </div>
+      <nav>
+        <button class="nav-btn active" onclick="switchTab('overview')">Vue d'Ensemble</button>
+        <button class="nav-btn" onclick="switchTab('iso27001')">ISO/IEC 27001</button>
+        <button class="nav-btn" onclick="switchTab('iso42001')">ISO/IEC 42001 (IA)</button>
+        <button class="nav-btn" onclick="switchTab('comparison')">Comparatif &amp; Synergie</button>
+        <button class="nav-btn" onclick="switchTab('linkedin')">Marché &amp; Profils LinkedIn</button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <!-- Hero Section -->
+    <div class="hero">
+      <div style="margin-bottom: 1rem;">
+        <span class="pill pill-purple">Architecture &amp; Spécifications Validées par l'Orchestrateur (CTO Awema)</span>
+      </div>
+      <h1>Gouvernance, Sécurité des SI &amp; Management de l'IA</h1>
+      <p>
+        Guide d'expertise et référentiel comparatif des normes internationales <strong>ISO/IEC 27001:2022</strong> (Sécurité de l'Information) et <strong>ISO/IEC 42001:2023</strong> (Systèmes de Management de l'Intelligence Artificielle).
+      </p>
+
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">93</div>
+          <div class="stat-label">Mesures de Sécurité (ISO 27001 Annexe A)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">38</div>
+          <div class="stat-label">Objectifs de Contrôle IA (ISO 42001 Annexe A)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">100%</div>
+          <div class="stat-label">Structure Harmonisée (Harmonized Structure HS)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">WAEMU</div>
+          <div class="stat-label">Conformité Bancaire &amp; Réglementaire (UEMOA)</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- TAB 1: OVERVIEW -->
+    <section id="overview" class="active">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+        L'Intégration Stratégique : Cyberdéfense &amp; Intelligence Artificielle
+      </h2>
+
+      <div class="grid-2">
+        <div class="card card-iso-27001">
+          <div class="card-header">
+            <div>
+              <div class="card-title">ISO/IEC 27001:2022</div>
+              <div class="card-subtitle">Système de Management de la Sécurité de l'Information (SMSI / ISMS)</div>
+            </div>
+            <span class="pill pill-blue">Pilier Résilience</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Le standard d'or mondial pour protéger les actifs informationnels. Il garantit la triade <strong>Confidentialité - Intégrité - Disponibilité (CID)</strong> à travers un processus dynamique d'évaluation des risques et 93 mesures réparties en 4 thèmes.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#60a5fa" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Organisationnel :</strong> Politiques, rôles, classification des données.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#60a5fa" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Personnes :</strong> Sensibilisation, clauses de confidentialité, télétravail.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#60a5fa" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Physique &amp; Technique :</strong> Sécurité périmétrique, chiffrement, gestion des accès.</span>
+            </li>
+          </ul>
+        </div>
+
+        <div class="card card-iso-42001">
+          <div class="card-header">
+            <div>
+              <div class="card-title">ISO/IEC 42001:2023</div>
+              <div class="card-subtitle">Système de Management de l'IA (SMIA / AIMS)</div>
+            </div>
+            <span class="pill pill-green">Nouvelle Frontière</span>
+          </div>
+          <p style="color: var(--text-muted); font-size: 0.95rem;">
+            Première norme internationale certifiable dédiée à l'utilisation responsable et éthique de l'IA. Elle encadre la transparence, l'explicabilité, la prévention des biais, la gouvernance des données d'apprentissage et la supervision humaine.
+          </p>
+          <ul class="feature-list">
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Gouvernance de l'IA :</strong> Définition des rôles et politiques éthiques de l'entreprise.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Évaluation d'Impact :</strong> Analyse des biais, hallucinations, sécurité des modèles.</span>
+            </li>
+            <li>
+              <svg width="18" height="18" fill="none" stroke="#34d399" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+              <span><strong>Cycle de Vie :</strong> De l'acquisition des données au décommissionnement du modèle.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Integrated Architecture Diagram -->
+      <div class="diagram-container">
+        <h3 style="margin-bottom: 1.5rem; font-weight: 700;">Modèle Intégré : Harmonized Structure (HS) ISO</h3>
+        <svg class="svg-diagram" viewBox="0 0 800 320" width="100%" height="auto">
+          <!-- Outer Box: Harmonized Structure -->
+          <rect x="20" y="20" width="760" height="280" rx="16" fill="rgba(30, 41, 59, 0.4)" stroke="rgba(255, 255, 255, 0.1)" stroke-width="1.5" />
+          <text x="40" y="55" fill="#94a3b8" font-family="Plus Jakarta Sans" font-size="14" font-weight="600">STRUCTURE HARMONISÉE (Clauses 4 à 10 : Contexte, Leadership, Planification, Support, Activités, Évaluation, Amélioration)</text>
+
+          <!-- Left Pill: ISO 27001 -->
+          <rect x="50" y="80" width="330" height="190" rx="12" fill="rgba(59, 130, 246, 0.12)" stroke="rgba(59, 130, 246, 0.4)" stroke-width="2" />
+          <text x="75" y="115" fill="#60a5fa" font-family="Plus Jakarta Sans" font-size="18" font-weight="700">ISO/IEC 27001 (SMSI)</text>
+          <text x="75" y="145" fill="#cbd5e1" font-size="13">• Confidentialité &amp; Intégrité des données</text>
+          <text x="75" y="170" fill="#cbd5e1" font-size="13">• Gestion des vulnérabilités &amp; Incidents</text>
+          <text x="75" y="195" fill="#cbd5e1" font-size="13">• Annexe A : 93 mesures de cybersécurité</text>
+          <text x="75" y="220" fill="#cbd5e1" font-size="13">• Sécurisation du réseau &amp; de l'infrastructure</text>
+
+          <!-- Right Pill: ISO 42001 -->
+          <rect x="420" y="80" width="330" height="190" rx="12" fill="rgba(16, 185, 129, 0.12)" stroke="rgba(16, 185, 129, 0.4)" stroke-width="2" />
+          <text x="445" y="115" fill="#34d399" font-family="Plus Jakarta Sans" font-size="18" font-weight="700">ISO/IEC 42001 (SMIA)</text>
+          <text x="445" y="145" fill="#cbd5e1" font-size="13">• Éthique, Équité &amp; Réduction des biais</text>
+          <text x="445" y="170" fill="#cbd5e1" font-size="13">• Transparence &amp; Explicabilité algorithmique</text>
+          <text x="445" y="195" fill="#cbd5e1" font-size="13">• Évaluation d'impact spécifique à l'IA</text>
+          <text x="445" y="220" fill="#cbd5e1" font-size="13">• Supervision humaine &amp; cycle de vie modèle</text>
+
+          <!-- Convergence Link -->
+          <path d="M 380 175 L 420 175" stroke="#a855f7" stroke-width="3" stroke-dasharray="4" />
+          <text x="400" y="165" fill="#c084fc" font-size="11" font-family="monospace" text-anchor="middle">SYNERGIE</text>
+        </svg>
+        <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 1rem;">
+          Les deux normes partagent le même cycle <strong>Plan-Do-Check-Act (PDCA)</strong>. Une organisation déjà certifiée ISO 27001 peut intégrer ISO 42001 en capitalisant sur son infrastructure de gouvernance existante.
+        </p>
+      </div>
+    </section>
+
+    <!-- TAB 2: ISO 27001 -->
+    <section id="iso27001">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg>
+        Fiche Normative : ISO/IEC 27001:2022
+      </h2>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">Les 4 Piliers de l'Annexe A (Édition 2022)</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          La version 2022 a consolidé les 114 contrôles précédents en <strong>93 mesures simplifiées</strong> regroupées sous 4 thèmes clés, adaptées aux réalités modernes du Cloud, du télétravail et de la cyber-résilience :
+        </p>
+
+        <div class="audit-flow">
+          <div class="step-box">
+            <div class="num" style="background: #3b82f6; color: white;">37</div>
+            <strong>Organisationnel</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Politiques de sécurité, gestion des actifs, contrôle d'accès, relations fournisseurs.</p>
+          </div>
+          <div class="step-box">
+            <div class="num" style="background: #3b82f6; color: white;">8</div>
+            <strong>Personnes</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Sensibilisation continue, filtrage avant embauche, télétravail, signalement d'incidents.</p>
+          </div>
+          <div class="step-box">
+            <div class="num" style="background: #3b82f6; color: white;">14</div>
+            <strong>Physique</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Périmètres de sécurité, centres de données, protection contre les menaces environnementales.</p>
+          </div>
+          <div class="step-box">
+            <div class="num" style="background: #3b82f6; color: white;">34</div>
+            <strong>Technologique</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Chiffrement, gestion des clés, sécurité des configurations, monitoring réseau, EDR/XDR.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 3: ISO 42001 -->
+    <section id="iso42001">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#10b981" stroke-width="2"><path d="M12 2a10 10 0 1 0 10 10H12V2z"></path><path d="M12 2a10 10 0 0 1 10 10h-10V2z"></path></svg>
+        Fiche Normative : ISO/IEC 42001:2023 (Management de l'IA)
+      </h2>
+
+      <div class="card" style="margin-bottom: 2rem;">
+        <h3 style="margin-bottom: 1rem;">Pourquoi l'IA exige une norme dédiée ?</h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+          Les systèmes d'IA traditionnels et génératifs (LLM, modèles autonomes) introduisent des risques que la sécurité classique ne peut appréhender seule : <em>dérive de modèle, hallucinations, empoisonnement des données d'entraînement (Data Poisoning), violation de la vie privée, et absence d'explicabilité</em>.
+        </p>
+
+        <div class="audit-flow">
+          <div class="step-box">
+            <div class="num">1</div>
+            <strong>AI Risk Assessment</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Évaluation spécifique des risques de biais, d'équité et de dérive décisionnelle.</p>
+          </div>
+          <div class="step-box">
+            <div class="num">2</div>
+            <strong>Data Governance</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Provenance traçable des jeux de données, conformité RGPD/protection des données.</p>
+          </div>
+          <div class="step-box">
+            <div class="num">3</div>
+            <strong>Human Oversight</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Garantie d'une intervention humaine (Human-in-the-Loop) sur les décisions critiques.</p>
+          </div>
+          <div class="step-box">
+            <div class="num">4</div>
+            <strong>Continuous Audit</strong>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">Monitoring en production de la précision, de la latence et de l'intégrité des inférences.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- TAB 4: COMPARISON TABLE -->
+    <section id="comparison">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#a855f7" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+        Matrice Comparative des Exigences
+      </h2>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Dimension</th>
+              <th>ISO/IEC 27001:2022 (SMSI)</th>
+              <th>ISO/IEC 42001:2023 (SMIA)</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Objet Principal</strong></td>
+              <td>Protection de la Confidentialité, Intégrité et Disponibilité (CID) de l'information.</td>
+              <td>Gouvernance éthique, fiabilité, transparence et robustesse des systèmes d'IA.</td>
+            </tr>
+            <tr>
+              <td><strong>Périmètre des Risques</strong></td>
+              <td>Fuites de données, cyberattaques, pannes physiques, erreurs humaines, intrusions.</td>
+              <td>Biais algorithmiques, hallucinations, dérives de modèle, conformité éthique, impact sociétal.</td>
+            </tr>
+            <tr>
+              <td><strong>Contrôles Principaux</strong></td>
+              <td>93 mesures (Annexe A) : Pare-feu, chiffrement, gestion des accès, sauvegarde.</td>
+              <td>38 mesures (Annexe A &amp; B) : Qualité des données, test de biais, traçabilité des poids/prompts.</td>
+            </tr>
+            <tr>
+              <td><strong>Publics Clés</strong></td>
+              <td>RSSI, Auditeurs IT, Ingénieurs Sécurité, DSI, Administrateurs Systèmes.</td>
+              <td>Chief AI Officers, Data Scientists, Juristes Numériques, Responsables Éthique IA.</td>
+            </tr>
+            <tr>
+              <td><strong>Synergie d'Audit</strong></td>
+              <td>Socle de conformité pour l'infrastructure hébergeant les modèles.</td>
+              <td>Extension au niveau applicatif et décisionnel pour les systèmes autonomes.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- TAB 5: LINKEDIN RESEARCH -->
+    <section id="linkedin">
+      <h2 class="section-title">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#0077b5" stroke-width="2"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"></path><rect x="2" y="9" width="4" height="12"></rect><circle cx="4" cy="4" r="2"></circle></svg>
+        Observations &amp; Marché Professionnel LinkedIn (Côte d'Ivoire &amp; Afrique)
+      </h2>
+
+      <div class="insight-card">
+        <div class="insight-header">
+          <div class="linkedin-icon">in</div>
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 700;">État de l'Adoption Professionnelle</h3>
+            <span style="font-size: 0.85rem; color: var(--text-muted);">Recherche effectuée par le Research Agent (research-01)</span>
+          </div>
+        </div>
+
+        <p style="color: #cbd5e1; font-size: 0.95rem; line-height: 1.6;">
+          D'après nos requêtes sur le réseau professionnel LinkedIn à Abidjan et en Afrique de l'Ouest :
+        </p>
+
+        <ul class="feature-list">
+          <li>
+            <svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><strong>ISO 27001 est devenue un prérequis obligatoire :</strong> Présente sur les profils des RSSI et auditeurs de banques (Société Générale, Banque Atlantique, Ecobank), cabinets d'audit (Deloitte, EY) et opérateurs télécoms (Orange, MTN). C'est le standard exigé dans les appels d'offres publics et privés.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><strong>ISO 42001 est une opportunité pionnière :</strong> En 2026, <em>moins de 20 professionnels en Côte d'Ivoire</em> affichent publiquement une certification ISO 42001 (Lead Auditor / Lead Implementer). Les institutions et entreprises intégrant des modèles d'IA manquent d'auditeurs certifiés pour prouver leur conformité.</span>
+          </li>
+          <li>
+            <svg width="18" height="18" fill="none" stroke="#10b981" stroke-width="2" viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+            <span><strong>Double Compétence recherchée :</strong> Les profils capables de maîtriser à la fois la sécurité opérationnelle (CEH / ISO 27001) et la gouvernance de l'IA (ISO 42001) captent les missions de conseil les plus valorisées du marché.</span>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>Portfolio développé dans le cadre du <strong>LAB 3 Multi-Agents</strong> — Hacktualiz Inc. &amp; SAS</p>
+    <p style="font-size: 0.8rem; margin-top: 0.4rem; color: #64748b;">
+      Agents : <code>research-01</code> (Research &amp; Data) | <code>orchestrator-01</code> (Routing) | <code>awema-cto</code> (Project Planning &amp; Spec)
+    </p>
+  </footer>
+
+  <script>
+    function switchTab(tabId) {
+      document.querySelectorAll('section').forEach(sec => sec.classList.remove('active'));
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+
+      const targetSection = document.getElementById(tabId);
+      if (targetSection) targetSection.classList.add('active');
+
+      const clickedBtn = Array.from(document.querySelectorAll('.nav-btn')).find(b => b.getAttribute('onclick').includes(tabId));
+      if (clickedBtn) clickedBtn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
