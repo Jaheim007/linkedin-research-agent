@@ -454,7 +454,7 @@ def register_to_orchestrator(req: RegisterRequest):
         logger.error(f"Registration error: {e}")
         return {
             "status": "error",
-            "message": str(e),
+            "message": "Unable to register with orchestrator.",
             "payload": registration_payload
         }
 
