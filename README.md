@@ -79,7 +79,7 @@ The agent exposes the following capabilities during **Capability Discovery**:
 | `GET` | `/tasks/{task_id}` | Task status and result retrieval |
 | `POST` | `/tools/search` | Direct search (`{"query": "...", "max_results": 5}`) |
 | `POST` | `/tools/fetch` | Direct webpage text extraction (`{"url": "...", "max_chars": 3000}`) |
-| `POST` | `/register` | Triggers self-registration to any remote Orchestrator |
+| `POST` | `/register` | Registers this agent with the configured Orchestrator |
 | `GET` | `/events` | Real-time audit log of all network events and task durations |
 | `GET` | `/docs` | Interactive OpenAPI Swagger UI |
 
@@ -125,6 +125,8 @@ python test_agent.py
 ```
 
 ### 4. Connect to an Orchestrator
+Set `ORCHESTRATOR_URL` to the approved Orchestrator URL before starting the agent. The `/register` endpoint only sends registration requests to that configured URL.
+
 ```bash
 # Register to Machine 1 Orchestrator
 python register.py http://<ORCHESTRATOR_IP>:8000

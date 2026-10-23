@@ -417,6 +417,13 @@ def fetch_endpoint(req: FetchRequest):
 
 @app.post("/register")
 def register_to_orchestrator(req: RegisterRequest):
+    configured_url = ORCHESTRATOR_URL.rstrip("/")
+    if req.orchestrator_url.rstrip("/") != configured_url:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="Registration URL must match the configured ORCHESTRATOR_URL"
+        )
+
     host_ip = req.my_ip or get_local_ip()
 
     formatted_capabilities = [
@@ -439,7 +446,7 @@ def register_to_orchestrator(req: RegisterRequest):
         }
     }
 
-    target_url = req.orchestrator_url.rstrip("/") + "/register"
+    target_url = configured_url + "/register"
     log_event("register_attempt", {"target": target_url, "payload": registration_payload})
 
     try:
