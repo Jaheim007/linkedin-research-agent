@@ -270,7 +270,7 @@ class TaskRequest(BaseModel):
     task_id: Optional[str] = Field(None, description="Identifiant unique de la tâche")
     capability: Optional[str] = Field("research", description="Capacité demandée (ex: research, web_search, documentation)")
     context: Optional[Dict[str, Any]] = Field(default_factory=dict, description="Paramètres ou contexte optionnel")
-    api_key: Optional[str] = Field(None, description="Clé API optionnelle")
+    api_key: [REDACTED_SECRET] = Field(None, description="Clé API optionnelle")
 
 
 class SearchRequest(BaseModel):
@@ -297,8 +297,7 @@ class RegisterRequest(BaseModel):
 # ============================================================
 # API ENDPOINTS
 # ============================================================
-
-@app.get("/")
+\[REDACTED_EMAIL]("/")
 def root():
     return {
         "agent_id": AGENT_ID,
@@ -317,8 +316,7 @@ def root():
         }
     }
 
-
-@app.get("/health")
+\[REDACTED_EMAIL]("/health")
 def health():
     return {
         "status": "online",
@@ -326,8 +324,7 @@ def health():
         "name": AGENT_NAME
     }
 
-
-@app.get("/capabilities")
+\[REDACTED_EMAIL]("/capabilities")
 def get_capabilities():
     return {
         "agent_id": AGENT_ID,
@@ -335,8 +332,7 @@ def get_capabilities():
         "capabilities": CAPABILITIES
     }
 
-
-@app.post("/tasks")
+\[REDACTED_EMAIL]("/tasks")
 def create_task(req: TaskRequest, request: Request):
     token = request.headers.get("X-API-Key") or request.headers.get("api-key") or req.api_key
     if not token and request.headers.get("Authorization"):
@@ -391,8 +387,7 @@ def create_task(req: TaskRequest, request: Request):
         "duration_seconds": duration
     }
 
-
-@app.get("/tasks/{task_id}")
+\[REDACTED_EMAIL]("/tasks/{task_id}")
 def get_task(task_id: str):
     if task_id not in tasks:
         raise HTTPException(
@@ -401,21 +396,18 @@ def get_task(task_id: str):
         )
     return tasks[task_id]
 
-
-@app.post("/tools/search")
+\[REDACTED_EMAIL]("/tools/search")
 def search_endpoint(req: SearchRequest):
     log_event("tool_search", {"query": req.query})
     results = tool_web_search(req.query, max_results=req.max_results or 5)
     return {"query": req.query, "count": len(results), "results": results}
 
-
-@app.post("/tools/fetch")
+\[REDACTED_EMAIL]("/tools/fetch")
 def fetch_endpoint(req: FetchRequest):
     log_event("tool_fetch", {"url": req.url})
     return tool_fetch_url(req.url, max_chars=req.max_chars or 3000)
 
-
-@app.post("/register")
+\[REDACTED_EMAIL]("/register")
 def register_to_orchestrator(req: RegisterRequest):
     configured_url = ORCHESTRATOR_URL.rstrip("/")
     if req.orchestrator_url.rstrip("/") != configured_url:
@@ -450,7 +442,10 @@ def register_to_orchestrator(req: RegisterRequest):
     log_event("register_attempt", {"target": target_url, "payload": registration_payload})
 
     try:
-        headers = {"Content-Type": "application/json", "X-API-Key": API_KEY}
+        headers = {"Content-Type": "application/json"}
+        trusted_hosts = {"192.168.1.35", "localhost", "127.0.0.1"}
+        if urllib.parse.urlparse(target_url).hostname in trusted_hosts:
+            headers["X-API-Key"] = API_KEY
         resp = requests.post(target_url, json=registration_payload, headers=headers, timeout=10)
         return {
             "status": "registered",
@@ -465,8 +460,7 @@ def register_to_orchestrator(req: RegisterRequest):
             "payload": registration_payload
         }
 
-
-@app.get("/events")
+\[REDACTED_EMAIL]("/events")
 def get_events():
     return {
         "agent_id": AGENT_ID,
